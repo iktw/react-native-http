@@ -28,10 +28,10 @@ var JWTRequest = {
         })
     },
 
-    fetch(url, options, skipAuthorization) {
+    fetch(url, options) {
         options = options || {};
 
-        if (skipAuthorization) {
+        if (options.skipAuthorization) {
             return this.handleUnAuthorizedFetch(url, options);
         } else {
             return this.handleAuthorizedFetch(url, options);
