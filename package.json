@@ -1,0 +1,28 @@
+{
+  "name": "react-native-jwt",
+  "version": "1.0.0",
+  "description": "React native jwt helper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iktw/react-native-jwt"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "jwt"
+  ],
+  "author": "Mohammed Hammoud",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iktw/react-native-jwt/issues"
+  },
+  "homepage": "https://github.com/iktw/react-native-jwt",
+  "dependencies": {
+    "react-native": "^0.4.1",
+    "buffer": "^3.2.2",
+  }
+}
