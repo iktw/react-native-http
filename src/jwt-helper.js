@@ -1,14 +1,9 @@
 var React = require('react-native');
-var Buffer = require('buffer').Buffer; // npm install buffer
+var Buffer = require('buffer').Buffer;
 
 var {
     AsyncStorage
     } = React;
-
-var JWTConfig = {
-    authHeader: 'Authorization',
-    authPrefix: 'Bearer'
-};
 
 var JWTHelper = {
     urlBase64Decode(str) {
@@ -73,45 +68,4 @@ var JWTHelper = {
 };
 
 
-var JWTRequest = {
-    handleUnAuthorizedFetch(url, options) {
-        return fetch(url, options).then((response) => response.json());
-    },
-
-    setAuthorizationHeader(options, token) {
-        if (!options.headers) options.headers = {};
-        options.headers[JWTConfig.authHeader] = `${JWTConfig.authPrefix} ${token}`;
-
-        return options;
-    },
-
-    handleAuthorizedFetch(url, options) {
-        return new Promise((resolve, reject) => {
-            JWTHelper.getToken().then((token) => {
-                if (token && !JWTHelper.isTokenExpired(token)) {
-                    options = this.setAuthorizationHeader(options, token);
-                    fetch(url, options).then((response) => {
-                        resolve(response.json())
-                    });
-                } else {
-                    reject('Token is either not valid or has expired.');
-                }
-            })
-        })
-    },
-
-    fetch(url, options, skipAuthorization) {
-        options = options || {};
-
-        if (skipAuthorization) {
-            return this.handleUnAuthorizedFetch(url, options);
-        } else {
-            return this.handleAuthorizedFetch(url, options);
-        }
-    }
-};
-
-module.exports = {
-    JWTHelper: JWTHelper,
-    JWTRequest: JWTRequest
-};
+module.exports = JWTHelper;
