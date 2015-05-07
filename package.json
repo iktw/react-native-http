@@ -1,8 +1,11 @@
 {
-  "name": "react-native-jwt",
+  "name": "react-native-http",
   "version": "1.0.0",
-  "description": "React native jwt helper",
+  "description": "React native http",
   "main": "index.js",
+  "bin": {
+    "react-native-http": "./bin/settings.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,7 +25,9 @@
   },
   "homepage": "https://github.com/iktw/react-native-jwt",
   "dependencies": {
-    "react-native": "^0.4.1",
     "buffer": "^3.2.2",
+    "file-save": "^0.2.0",
+    "react-native": "^0.4.1",
+    "yargs": "^3.8.0"
   }
 }

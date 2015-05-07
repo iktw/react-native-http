@@ -1,7 +1,9 @@
-var JWTConfig = {
-    authHeader: 'Authorization',
-    authPrefix: 'Bearer',
-    storageTokenPrefix: 'JWT_token'
-};
+var authHeader = require('./config/auth-header');
+var authPrefix = require('./config/auth-prefix');
+var storageTokenPrefix = require('./config/storage-token-prefix');
 
-module.exports = JWTConfig;
+module.exports = {
+    authHeader,
+    authPrefix,
+    storageTokenPrefix
+};
