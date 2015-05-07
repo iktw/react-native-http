@@ -1,7 +1,7 @@
+var $httpHelper = require('./http-helper');
 var JWTHelper = require('./jwt-helper');
-var JWTConfig = require('./jwt-config');
 
-var JWTRequest = {
+var $http = {
     status(response) {
         if (response.status >= 200 && response.status < 300) {
             return response
@@ -11,32 +11,6 @@ var JWTRequest = {
 
     json(response) {
         return response.json()
-    },
-
-    setDefaultHeaders(options) {
-        options.headers = options.headers || {};
-        if (!options.headers['Accept']) {
-            options.headers['Accept'] = 'application/json';
-        }
-
-        if (!options.headers['Content-Type']) {
-            options.headers['Content-Type'] = 'application/json';
-        }
-        return options;
-    },
-
-    setDefaultBody(options) {
-        options.body = options.body || {};
-        if (options.headers['Content-Type']) {
-            options.body = JSON.stringify(options.body);
-        }
-        return options;
-    },
-
-    setAuthorizationHeader(options, token) {
-        options.headers = options.headers || {};
-        options.headers[JWTConfig.authHeader] = `${JWTConfig.authPrefix} ${token}`;
-        return options;
     },
 
     handleUnAuthorizedFetch(url, options) {
@@ -56,13 +30,13 @@ var JWTRequest = {
         return new Promise((resolve, reject) => {
             JWTHelper.getToken().then((token) => {
                 if (token && !JWTHelper.isTokenExpired(token)) {
-                    options = this.setAuthorizationHeader(options, token);
+                    options = $httpHelper.setAuthorizationHeader(options, token);
                     fetch(url, options)
                         .then(this.status)
                         .then(this.json)
-                        .then(function (json) {
+                        .then((json) => {
                             resolve(json);
-                        }).catch(function (error) {
+                        }).catch((error) => {
                             reject(error);
                         });
                 } else {
@@ -74,15 +48,49 @@ var JWTRequest = {
 
     fetch(url, options) {
         options = options || {};
-        options = this.setDefaultHeaders(options);
-        options = this.setDefaultBody(options);
+        options = $httpHelper.setDefaultHeaders(options);
+        options = $httpHelper.setDefaultBody(options);
 
         if (options.skipAuthorization) {
             return this.handleUnAuthorizedFetch(url, options);
         } else {
             return this.handleAuthorizedFetch(url, options);
         }
-    }
+    },
+
+    get(url, params, options) {
+        options = options || {};
+        options.method = 'GET';
+        options.body = params;
+        return this.fetch(url, options);
+    },
+
+    post(url, data, options) {
+        options = options || {};
+        options.method = 'POST';
+        options.body = data;
+        return this.fetch(url, options);
+    },
+
+    put(url, data, options) {
+        options = options || {};
+        options.method = 'PUT';
+        options.body = data;
+        return this.fetch(url, options);
+    },
+
+    delete(url, options) {
+        options = options || {};
+        options.method = 'DELETE';
+        return this.fetch(url, options);
+    },
+
+    patch(url, data, options) {
+        options = options || {};
+        options.method = 'PATCH';
+        options.body = data;
+        return this.fetch(url, options);
+    },
 };
 
-module.exports = JWTRequest;
+module.exports = $http;
