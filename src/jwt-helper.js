@@ -54,16 +54,15 @@ var JWTHelper = {
             return false;
         }
 
-        // Token expired?
         return !(d.valueOf() > new Date().valueOf());
     },
 
     setToken(token) {
-        AsyncStorage.setItem('async_jwt_token', token);
+        AsyncStorage.setItem(JWTConfig.storageTokenPrefix, token);
     },
 
     getToken() {
-        return AsyncStorage.getItem('async_jwt_token');
+        return AsyncStorage.getItem(JWTConfig.storageTokenPrefix);
     }
 };
 
