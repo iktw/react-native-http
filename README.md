@@ -1,3 +1,3 @@
-# react-native-jwt
+# react-native-http
 
 work in progress
