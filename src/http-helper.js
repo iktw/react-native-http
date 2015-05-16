@@ -1,4 +1,4 @@
-var JWTConfig = require('./jwt-config');
+var $jwtConfig = require('./jwt-config');
 
 var $httpHelper = {
     setDefaultHeaders(options) {
@@ -26,7 +26,7 @@ var $httpHelper = {
 
     setAuthorizationHeader(options, token) {
         options.headers = options.headers || {};
-        options.headers[JWTConfig.authHeader] = `${JWTConfig.authPrefix} ${token}`;
+        options.headers[$jwtConfig.authHeader] = `${$jwtConfig.authPrefix} ${token}`;
         return options;
     }
 }

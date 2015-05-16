@@ -5,7 +5,7 @@ var {
     AsyncStorage
     } = React;
 
-var JWTHelper = {
+var $jwtHelper = {
     urlBase64Decode(str) {
         var output = str.replace('-', '+').replace('_', '/');
         switch (output.length % 4) {
@@ -67,4 +67,4 @@ var JWTHelper = {
 };
 
 
-module.exports = JWTHelper;
+module.exports = $jwtHelper;

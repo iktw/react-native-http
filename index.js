@@ -1,9 +1,9 @@
-var JWTConfig = require('./src/jwt-config');
-var JWTHelper = require('./src/jwt-helper');
+var $jwtConfig = require('./src/jwt-config');
+var $jwtHelper = require('./src/jwt-helper');
 var $http = require('./src/http');
 
 module.exports = {
-    JWTConfig,
-    JWTHelper,
+    $jwtConfig,
+    $jwtHelper,
     $http
 };

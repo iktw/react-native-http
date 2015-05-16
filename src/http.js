@@ -1,5 +1,5 @@
 var $httpHelper = require('./http-helper');
-var JWTHelper = require('./jwt-helper');
+var $jwtHelper = require('./jwt-helper');
 
 var $http = {
     status(response) {
@@ -28,8 +28,8 @@ var $http = {
 
     handleAuthorizedFetch(url, options) {
         return new Promise((resolve, reject) => {
-            JWTHelper.getToken().then((token) => {
-                if (token && !JWTHelper.isTokenExpired(token)) {
+            $jwtHelper.getToken().then((token) => {
+                if (token && !$jwtHelper.isTokenExpired(token)) {
                     options = $httpHelper.setAuthorizationHeader(options, token);
                     fetch(url, options)
                         .then(this.status)
