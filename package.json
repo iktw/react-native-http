@@ -1,6 +1,6 @@
 {
   "name": "react-native-http",
-  "version": "1.0.1",
+  "version": "0.0.1",
   "description": "React native http",
   "main": "index.js",
   "bin": {
