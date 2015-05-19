@@ -1,5 +1,6 @@
 var React = require('react-native');
 var Buffer = require('buffer').Buffer;
+var $jwtConfig = require('./jwt-config');
 
 var {
     AsyncStorage
@@ -57,14 +58,30 @@ var $jwtHelper = {
         return !(d.valueOf() > new Date().valueOf());
     },
 
+    clearToken() {
+        return AsyncStorage.removeItem(JWTConfig.storageTokenPrefix);
+    },
+
     setToken(token) {
-        AsyncStorage.setItem(JWTConfig.storageTokenPrefix, token);
+        return AsyncStorage.setItem(JWTConfig.storageTokenPrefix, token);
     },
 
     getToken() {
         return AsyncStorage.getItem(JWTConfig.storageTokenPrefix);
+    },
+
+    isAuthenticated() {
+        return new Promise((resolve, reject) => {
+            this.getToken()
+                .then((token) => {
+                    if (token && !this.isTokenExpired(token)) {
+                        resolve(true)
+                    } else {
+                        resolve(false)
+                    }
+                })
+        })
     }
 };
-
 
 module.exports = $jwtHelper;
