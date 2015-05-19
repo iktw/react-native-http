@@ -4,9 +4,9 @@ var $jwtHelper = require('./jwt-helper');
 var $http = {
     status(response) {
         if (response.status >= 200 && response.status < 300) {
-            return response
+            return response;
         }
-        throw Error(null) // Todo: Return response error here
+        throw response;
     },
 
     json(response) {
@@ -28,8 +28,8 @@ var $http = {
 
     handleAuthorizedFetch(url, options) {
         return new Promise((resolve, reject) => {
-            $jwtHelper.getToken().then((token) => {
-                if (token && !$jwtHelper.isTokenExpired(token)) {
+            JWTHelper.getToken().then((token) => {
+                if (token && !JWTHelper.isTokenExpired(token)) {
                     options = $httpHelper.setAuthorizationHeader(options, token);
                     fetch(url, options)
                         .then(this.status)
@@ -47,7 +47,7 @@ var $http = {
     },
 
     fetch(url, options) {
-        options = options || {};
+        options = options ? options : {};
         options = $httpHelper.setDefaultHeaders(options);
         options = $httpHelper.setDefaultBody(options);
 
@@ -59,38 +59,43 @@ var $http = {
     },
 
     get(url, params, options) {
-        options = options || {};
+        options = options ? options : {};
         options.method = 'GET';
-        options.body = params;
+
+        if (params) {
+            var getParams = $httpHelper.paramify(params);
+            url += `?${getParams}`;
+        }
+
         return this.fetch(url, options);
     },
 
     post(url, data, options) {
-        options = options || {};
+        options = options ? options : {};
         options.method = 'POST';
         options.body = data;
         return this.fetch(url, options);
     },
 
     put(url, data, options) {
-        options = options || {};
+        options = options ? options : {};
         options.method = 'PUT';
         options.body = data;
         return this.fetch(url, options);
     },
 
     delete(url, options) {
-        options = options || {};
+        options = options ? options : {};
         options.method = 'DELETE';
         return this.fetch(url, options);
     },
 
     patch(url, data, options) {
-        options = options || {};
+        options = options ? options : {};
         options.method = 'PATCH';
         options.body = data;
         return this.fetch(url, options);
-    },
+    }
 };
 
 module.exports = $http;
