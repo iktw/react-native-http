@@ -59,15 +59,15 @@ var $jwtHelper = {
     },
 
     clearToken() {
-        return AsyncStorage.removeItem(JWTConfig.storageTokenPrefix);
+        return AsyncStorage.removeItem($jwtConfig.storageTokenPrefix);
     },
 
     setToken(token) {
-        return AsyncStorage.setItem(JWTConfig.storageTokenPrefix, token);
+        return AsyncStorage.setItem($jwtConfig.storageTokenPrefix, token);
     },
 
     getToken() {
-        return AsyncStorage.getItem(JWTConfig.storageTokenPrefix);
+        return AsyncStorage.getItem($jwtConfig.storageTokenPrefix);
     },
 
     isAuthenticated() {
