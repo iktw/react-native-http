@@ -1,9 +1,5 @@
-var $jwtConfig = require('./src/jwt-config');
-var $jwtHelper = require('./src/jwt-helper');
-var $http = require('./src/http');
+var HTTPService = require('./src/services/http-service');
 
 module.exports = {
-    $jwtConfig,
-    $jwtHelper,
-    $http
+    HTTPService
 };
