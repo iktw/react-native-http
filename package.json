@@ -1,6 +1,6 @@
 {
   "name": "react-native-http",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React native http",
   "main": "index.js",
   "bin": {
@@ -14,9 +14,12 @@
     "url": "https://github.com/iktw/react-native-http"
   },
   "keywords": [
+    "react-native-component",
+    "react-component",
     "react",
     "native",
-    "jwt"
+    "jwt",
+    "http"
   ],
   "author": "Mohammed Hammoud",
   "license": "MIT",
@@ -25,9 +28,8 @@
   },
   "homepage": "https://github.com/iktw/react-native-jwt",
   "dependencies": {
-    "buffer": "^3.2.2",
+    "buffer": "^3.6.0",
     "file-save": "^0.2.0",
-    "react-native": "^0.4.1",
     "yargs": "^3.8.0"
   }
 }
