@@ -19,7 +19,7 @@ class HTTPService {
   }
 
   checkStatus(response) {
-      if (response.status >= 200 && response.status < 300) {
+      if (response.ok) {
           return response;
       }
       throw response;
