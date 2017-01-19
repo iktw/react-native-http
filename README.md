@@ -1,5 +1,6 @@
 # React Native HTTP
-**README in progress**
+
+# PACKAGE IS OUT OF DATE
 
 ## HTTPService constructor parameters
 | Name        | Type | Default |
